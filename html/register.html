@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: #1a1a1a;
+      color: white;
+      font-family: Arial;
+    }
+
+    .register-form {
+      width: 320px;
+      padding: 25px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      background: #2b2b2b;
+      border-radius: 20px;
+    }
+
+    .register-form input {
+      padding: 12px;
+
+      border: none;
+      border-radius: 10px;
+
+      background: #1f1f1f;
+      color: white;
+    }
+
+    .register-form button {
+      padding: 12px;
+
+      border: none;
+      border-radius: 10px;
+
+      background: orange;
+      color: black;
+
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .success {
+      color: lightgreen;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<form class="register-form" id="registerForm">
+
+  <h2>Регистрация</h2>
+
+  <input
+    type="text"
+    id="username"
+    placeholder="Имя"
+    required
+    minlength="3"
+  >
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Пароль"
+    required
+    minlength="8"
+  >
+
+  <input
+    type="password"
+    id="confirmPassword"
+    placeholder="Подтвердите пароль"
+    required
+  >
+
+  <button type="submit">
+    Регистрация
+  </button>
+
+  <p id="message"></p>
+
+</form>
+
+<script>
+
+  const form = document.getElementById("registerForm");
+
+  form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    const message = document.getElementById("message");
+
+    message.textContent = "";
+    message.className = "";
+
+    // проверка имени
+    if (username.length < 3) {
+      message.textContent = "Имя должно быть минимум 3 символа";
+      message.classList.add("error");
+      return;
+    }
+
+    // проверка пароля
+    if (password.length < 8) {
+      message.textContent = "Пароль должен быть минимум 8 символов";
+      message.classList.add("error");
+      return;
+    }
+
+    // проверка совпадения паролей
+    if (password !== confirmPassword) {
+      message.textContent = "Пароли не совпадают";
+      message.classList.add("error");
+      return;
+    }
+
+    // успешная регистрация
+    message.textContent = "Регистрация успешна";
+    message.classList.add("success");
+
+    form.reset();
+
+  });
+
+</script>
+
+</body>
+</html>
